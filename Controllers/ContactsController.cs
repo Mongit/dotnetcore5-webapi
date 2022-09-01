@@ -81,7 +81,8 @@ namespace dotnet5_webapi.Controllers
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetContact", new { id = contact.Id }, contact);
+            //return CreatedAtAction("GetContact", new { id = contact.Id }, contact);
+            return Ok(_context.Contacts);
         }
 
         // DELETE: api/Contacts/5
