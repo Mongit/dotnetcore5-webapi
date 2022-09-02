@@ -25,7 +25,7 @@ namespace dotnet5_webapi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()
         {
-            return await _context.Contacts.ToListAsync();
+            return await _context.Contacts.Where(c => c.IsDeleted == false).ToListAsync();
         }
 
         // GET: api/Contacts/5
@@ -86,10 +86,10 @@ namespace dotnet5_webapi.Controllers
                 return NotFound();
             }
 
-            _context.Contacts.Remove(contact);
+            //PUT, should be the right Http Method to implement the update of IsDelete Flag
+            contact.IsDeleted = true;
             await _context.SaveChangesAsync();
 
-            //return NoContent();
             return Ok(_context.Contacts);
         }
 
